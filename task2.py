@@ -1,4 +1,5 @@
 import tkinter as tk
+import math as isqrt
 root = tk.Tk()
 root.title("Калькуляторочив")
 root.geometry("800x500")
@@ -6,11 +7,28 @@ root.geometry("800x500")
 # Функции калькулятор
 def on_button_click(value):
     if value == "=":
-        print("Ровно")
-        textbox.get("1.0", tk.END) #
-         # просто вывод = == =
+        try:
+            result = eval(textbox.get("1.0", tk.END))
+            print(result) #вывод результата
+            textbox.delete("1.0", tk.END) 
+            textbox.insert(tk.END, result)
+        except ZeroDivisionError:
+            # Ошибка при делении на ноль
+            print("Ошибка: Деление на ноль!")
+            textbox.delete("1.0", tk.END) 
+            textbox.insert(tk.END, "Ошибка: Деление на ноль!")
+        except Exception as e:
+            # Любые другие ошибки
+            textbox.delete("1.0", tk.END) 
+            textbox.insert(tk.END, "Error")
+
+
+
+    elif value == "Clear":
+        textbox.delete("1.0", tk.END) # очистка поля
+    
     else:
-        textbox.insert(tk.END, value + " ") # вывод значения из кнопки
+        textbox.insert(tk.END, value) # вывод значения из кнопки
         
 # Надпись
 label = tk.Label(root, text="Калькулятор", font=("Arial", 18))
@@ -33,6 +51,10 @@ buttonFrame.columnconfigure(2, weight=1)
 buttonFrame.columnconfigure(3, weight=1)
 
 # Кнопочки
+btn17 = tk.Button(buttonFrame, text="(", font=("Arial", 18), command=lambda v="(": on_button_click(v))
+btn18 = tk.Button(buttonFrame, text=")", font=("Arial", 18), command=lambda v=")": on_button_click(v))
+btn19 = tk.Button(buttonFrame, text=".", font=("Arial", 18), command=lambda v=".": on_button_click(v))
+btn20 = tk.Button(buttonFrame, text="√", font=("Arial", 18), command=lambda v=: on_button_click(v))
 btn1 = tk.Button(buttonFrame, text="1", font=("Arial", 18), command=lambda v="1": on_button_click(v))
 btn2 = tk.Button(buttonFrame, text="2", font=("Arial", 18), command=lambda v="2": on_button_click(v))
 btn3 = tk.Button(buttonFrame, text="3", font=("Arial", 18), command=lambda v="3": on_button_click(v))
@@ -51,22 +73,26 @@ btn15 = tk.Button(buttonFrame, text="=", font=("Arial", 18), command=lambda v="=
 btn16 = tk.Button(buttonFrame, text="/", font=("Arial", 18), command=lambda v="/": on_button_click(v))
 
 # Вызов кнопки
-btn1.grid(row=0, column=0, sticky="we")
-btn2.grid(row=0, column=1, sticky="we")
-btn3.grid(row=0, column=2, sticky="we")
-btn4.grid(row=0, column=3, sticky="we")
-btn5.grid(row=1, column=0, sticky="we")
-btn6.grid(row=1, column=1, sticky="we")
-btn7.grid(row=1, column=2, sticky="we")
-btn8.grid(row=1, column=3, sticky="we")
-btn9.grid(row=2, column=0, sticky="we")
-btn10.grid(row=2, column=1, sticky="we")
-btn11.grid(row=2, column=2, sticky="we")
-btn12.grid(row=2, column=3, sticky="we")
-btn13.grid(row=3, column=0, sticky="we")
-btn14.grid(row=3, column=1, sticky="we")
-btn15.grid(row=3, column=2, sticky="we")
-btn16.grid(row=3, column=3, sticky="we")
+btn17.grid(row=0, column=0, sticky="we")
+btn18.grid(row=0, column=1, sticky="we")
+btn19.grid(row=0, column=2, sticky="we")
+btn20.grid(row=0, column=3, sticky="we")
+btn1.grid(row=1, column=0, sticky="we")
+btn2.grid(row=1, column=1, sticky="we")
+btn3.grid(row=1, column=2, sticky="we")
+btn4.grid(row=1, column=3, sticky="we")
+btn5.grid(row=2, column=0, sticky="we")
+btn6.grid(row=2, column=1, sticky="we")
+btn7.grid(row=2, column=2, sticky="we")
+btn8.grid(row=2, column=3, sticky="we")
+btn9.grid(row=3, column=0, sticky="we")
+btn10.grid(row=3, column=1, sticky="we")
+btn11.grid(row=3, column=2, sticky="we")
+btn12.grid(row=3, column=3, sticky="we")
+btn13.grid(row=4, column=0, sticky="we")
+btn14.grid(row=4, column=1, sticky="we")
+btn15.grid(row=4, column=2, sticky="we")
+btn16.grid(row=4, column=3, sticky="we")
 
 # Запуск калькулятора
 root.mainloop()
