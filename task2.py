@@ -1,5 +1,5 @@
 import tkinter as tk
-import math as isqrt
+import math
 root = tk.Tk()
 root.title("Калькуляторочив")
 root.geometry("800x500")
@@ -22,7 +22,11 @@ def on_button_click(value):
             textbox.delete("1.0", tk.END) 
             textbox.insert(tk.END, "Error")
 
-
+    elif value == "√":
+        love = eval(textbox.get("1.0", tk.END))
+        sqrt_math = math.sqrt(love)
+        textbox.delete("1.0", tk.END) 
+        textbox.insert(tk.END, sqrt_math)
 
     elif value == "Clear":
         textbox.delete("1.0", tk.END) # очистка поля
@@ -31,7 +35,7 @@ def on_button_click(value):
         textbox.insert(tk.END, value) # вывод значения из кнопки
         
 # Надпись
-label = tk.Label(root, text="Калькулятор", font=("Arial", 18))
+label = tk.Label(root, text="Калькулятор", font=("comic sans", 18))
 label.pack(padx=20, pady=20)
 
 # Текстовое окно
@@ -54,7 +58,7 @@ buttonFrame.columnconfigure(3, weight=1)
 btn17 = tk.Button(buttonFrame, text="(", font=("Arial", 18), command=lambda v="(": on_button_click(v))
 btn18 = tk.Button(buttonFrame, text=")", font=("Arial", 18), command=lambda v=")": on_button_click(v))
 btn19 = tk.Button(buttonFrame, text=".", font=("Arial", 18), command=lambda v=".": on_button_click(v))
-btn20 = tk.Button(buttonFrame, text="√", font=("Arial", 18), command=lambda v=: on_button_click(v))
+btn20 = tk.Button(buttonFrame, text="√", font=("Arial", 18), command=lambda v="√": on_button_click(v))
 btn1 = tk.Button(buttonFrame, text="1", font=("Arial", 18), command=lambda v="1": on_button_click(v))
 btn2 = tk.Button(buttonFrame, text="2", font=("Arial", 18), command=lambda v="2": on_button_click(v))
 btn3 = tk.Button(buttonFrame, text="3", font=("Arial", 18), command=lambda v="3": on_button_click(v))
@@ -96,4 +100,3 @@ btn16.grid(row=4, column=3, sticky="we")
 
 # Запуск калькулятора
 root.mainloop()
-print("Я ЛОХ")
